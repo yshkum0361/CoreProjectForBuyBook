@@ -1,0 +1,131 @@
+﻿@model BullkyBook.Model.ViewModels.ProductVM
+
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    
+    <input asp-for="product.pro_id" hidden />
+    <input asp-for="product.ImageURL" hidden />
+    
+   
+   <div class="row">
+       <div class="col-10">
+            <div class="border p-3 mt-4 row">
+                <div class="col-12 pb-2">
+                    <h2 nam class="text-primary">@(Model.product.pro_id != 0 ? "Update" : "Create") Product </h2>
+                    <hr />
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="product.pro_name"></label>
+                    <input asp-for="product.pro_name" class="form-control" />
+                    <span asp-validation-for="product.pro_name" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="product.pro_description"></label>
+                    <textarea asp-for="product.pro_description" row="3" class="form-control"></textarea>
+                    <span asp-validation-for="product.pro_description" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="product.Author"></label>
+                    <input asp-for="product.Author" class="form-control" />
+                    <span asp-validation-for="product.Author" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="product.ListPrice"></label>
+                    <input asp-for="product.ListPrice" class="form-control" />
+                    <span asp-validation-for="product.ListPrice" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="product.price50"></label>
+                    <input asp-for="product.price50" class="form-control" />
+                    <span asp-validation-for="product.price50" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="product.price100"></label>
+                    <input asp-for="product.price100" class="form-control" />
+                    <span asp-validation-for="product.price100" class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="product.ImageURL"></label>
+                    <input type="file" id="uploadBox" name="file" class="form-control" />
+
+                </div>
+
+                <div class="mb-3 col-6">
+                    <label asp-for="product.categoryID"></label>
+                    <select asp-for="product.categoryID" class="form-select" asp-items="@Model.CategoryList">
+
+                        <option disabled selected> --Select Category--</option>
+                    </select>
+
+
+                </div>
+
+                <div class="mb-3 col-6 ">
+                    <label asp-for="product.coverTypeID"></label>
+                    <select asp-for="product.coverTypeID" class="form-select" asp-items="@Model.coverTypeList">
+
+                        <option disabled selected> --Select Cover Type--</option>
+                    </select>
+
+                </div>
+                <div class="col-12">
+                    @if (Model.product.pro_id != 0)
+                    {
+                        <button class="btn btn-primary" type="submit" style="width:40%">Update </button>
+
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary" onclick="return ValidateInput()" type="submit" style="width:40%">Create </button>
+
+                    }
+
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:40%">Show Category</a>
+                </div>
+            </div>
+       </div>
+       <div class="col-2 pt-4">
+
+           <img src="@Model.product.ImageURL"
+           widht="100px" height="400px" style="border-radius:5px; border:1px solid #bbb9b9" />
+       </div>
+   </div>
+   
+</form>
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+
+    }
+    <script>
+        function ValidateInput(){
+            if(document.getElementById("uploadBox").value==""){
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Oops...',
+                         text: 'Please select a Image file!',
+                         
+                     });
+                     return false;
+
+            }
+            return true;
+        }
+    </script>
+            }

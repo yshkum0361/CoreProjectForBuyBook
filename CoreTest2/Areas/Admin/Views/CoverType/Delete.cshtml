@@ -1,0 +1,29 @@
+﻿@model CoverTypeModel
+
+<form method="post" asp-action="Delete">
+    <input asp-for="cover_Id" hidden/>
+    
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">DELETE CoverType</h2>
+            <hr />
+
+        </div>
+      
+        <div class="mb-3">
+            <label asp-for="cover_Name"></label>
+            <input asp-for="cover_Name" disabled class="form-control" />
+            
+
+        </div>
+      
+        <button class="btn btn-danger" type="submit" style="width:40%">Delete </button>&nbsp;
+        <a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary" style="width:40%">Show Category</a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+            }
